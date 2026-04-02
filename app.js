@@ -29,20 +29,20 @@ const PROJECTS = [
     updated: '2026-04-01'
   },
   {
-    name: 'Fire Scope',
-    desc: 'Real-time global wildfire intelligence dashboard with NASA satellite data, weather overlays, and fire danger indices.',
-    lang: 'JavaScript', langClass: 'javascript',
-    url: 'https://github.com/AnupamaSharma2000/fire-scope',
-    tags: ['data', 'web'],
-    updated: '2026-03-19'
+    name: 'Qwen2-VL Extraction Pipeline',
+    desc: 'Fine-tuned Qwen2 Vision Language Model for structured information extraction from financial documents, achieving ~25% F1 improvement on A100 GPUs.',
+    lang: 'Python', langClass: 'python',
+    url: 'https://github.com/AnupamaSharma2000',
+    tags: ['ml'],
+    updated: '2025-07-01'
   },
   {
-    name: 'Neural LAM',
-    desc: 'Research software for neural weather prediction for limited area modeling.',
+    name: 'Multi-Agent RAG System',
+    desc: 'Multi-stage retrieval and ranking system with query understanding, semantic search, relevance scoring, and real-time monitoring dashboard for KPIs.',
     lang: 'Python', langClass: 'python',
-    url: 'https://github.com/AnupamaSharma2000/neural-lam',
+    url: 'https://github.com/AnupamaSharma2000/MultiAgent_RAG',
     tags: ['ml'],
-    updated: '2026-03-19'
+    updated: '2026-03-01'
   },
   {
     name: 'Floor Plan Symbol Detector',
@@ -53,36 +53,12 @@ const PROJECTS = [
     updated: '2026-03-10'
   },
   {
-    name: 'AI Career Agent',
-    desc: 'Personal intelligence & career pipeline that automates internship search with AI agents.',
+    name: 'T2I Prompt Adherence Study',
+    desc: 'VAE-based evaluation framework benchmarking 5 text-to-image models for spatial grounding and prompt adherence across resolutions.',
     lang: 'Python', langClass: 'python',
-    url: 'https://github.com/AnupamaSharma2000/AI-Career-Agent',
-    tags: ['ml'],
-    updated: '2026-03-04'
-  },
-  {
-    name: 'MultiAgent RAG',
-    desc: 'Multi-agent retrieval-augmented generation system for complex question answering.',
-    lang: 'Python', langClass: 'python',
-    url: 'https://github.com/AnupamaSharma2000/MultiAgent_RAG',
-    tags: ['ml'],
-    updated: '2025-11-24'
-  },
-  {
-    name: 'Sports CRM Pipeline',
-    desc: 'Data pipeline for sports customer relationship management and analytics.',
-    lang: 'Python', langClass: 'python',
-    url: 'https://github.com/AnupamaSharma2000/sports_crm_pipeline',
-    tags: ['data'],
-    updated: '2025-11-25'
-  },
-  {
-    name: 'Healthcare Analysis (R)',
-    desc: 'Data visualization and analysis of timely & effective care metrics using R.',
-    lang: 'R', langClass: 'r',
-    url: 'https://github.com/AnupamaSharma2000/Timely_Effective_Care_analysis_R',
-    tags: ['data'],
-    updated: '2025-11-07'
+    url: 'https://github.com/AnupamaSharma2000',
+    tags: ['ml', 'data'],
+    updated: '2025-03-01'
   }
 ];
 
@@ -99,11 +75,14 @@ const SKILLS_DATA = {
   values: [95, 88, 82, 85, 78, 80, 85, 70]
 };
 
-const LANGUAGE_DATA = {
-  labels: ['Python', 'TypeScript', 'Jupyter', 'HTML', 'R', 'Other'],
-  values: [40, 20, 15, 10, 8, 7],
-  colors: ['#3572A5', '#3178C6', '#DA5B0B', '#e34c26', '#198CE7', '#6bb8e8']
-};
+const LANGUAGE_DATA = [
+  { lang: 'Python',     pct: 40, color: '#d4a24c' },
+  { lang: 'TypeScript', pct: 20, color: '#6bb8e8' },
+  { lang: 'Jupyter',    pct: 15, color: '#e8935a' },
+  { lang: 'HTML',       pct: 10, color: '#b88be8' },
+  { lang: 'R',          pct:  8, color: '#a3d977' },
+  { lang: 'C/C++',      pct:  7, color: '#9b9688' },
+];
 
 // ---- TERMINAL COMMANDS ----
 const COMMANDS = {
@@ -155,12 +134,16 @@ const COMMANDS = {
 <span class="boot-accent">╚════════════════════════════════════════╝</span>`,
 
   experience: () => `<span class="boot-accent">╔══ EXPERIENCE ══════════════════════════╗</span>
-  <span class="boot-info">▸</span> Technology Analyst — Synechron
-    2022 – 2025
-    Data engineering, ML models, ETL pipelines
-  <span class="boot-info">▸</span> Graduate Student — UMD
-    2025 – Present
-    Research in neural weather prediction & RL
+  <span class="boot-info">▸</span> Jr. Associate ML Eng — Synechron
+    Jul 2024 – Jul 2025
+    Qwen2-VL fine-tuning, ML pipelines, REST APIs
+  <span class="boot-info">▸</span> AI-ML Intern — Synechron
+    Jul 2023 – Jun 2024
+    Multi-agent RAG, LangGraph, ChromaDB
+  <span class="boot-info">▸</span> MS Data Science — UMD
+    Aug 2025 – May 2027
+  <span class="boot-info">▸</span> MS Physics + B.E. EEE — BITS Pilani
+    2019 – 2024
 <span class="boot-accent">╚════════════════════════════════════════╝</span>`,
 
   contact: () => `<span class="boot-accent">╔══ CONTACT ═════════════════════════════╗</span>
@@ -171,11 +154,9 @@ const COMMANDS = {
 <span class="boot-accent">╚════════════════════════════════════════╝</span>`,
 
   fun: () => `<span class="boot-accent">╔══ FUN FACTS ═══════════════════════════╗</span>
-  🌏 Moved from India to the US for grad school
-  ☕ Fueled by chai and late-night debugging
-  🏋 Gym is non-negotiable — even during finals
-  📈 Built an AI agent to automate job search
-  ⭐ BITSian who loves open source
+  🏸 Love playing badminton
+  ☕ Loves chai AND coffee (would mix them just to annoy everyone)
+  🐱 If I could be an animal, I'd be a cat
 <span class="boot-accent">╚════════════════════════════════════════╝</span>`,
 
   whoami: () => `annu@portfolio — Data Scientist, ML Engineer, Builder`,
@@ -301,6 +282,8 @@ function initDashboard() {
   initTerminal();
   initCharts();
   animateCounters();
+  // Render lang bars after a frame so the DOM is fully painted
+  requestAnimationFrame(() => requestAnimationFrame(renderLangBars));
 }
 
 // ---- NAVIGATION ----
@@ -509,35 +492,37 @@ function initCharts() {
     }
   });
 
-  // Language donut
-  new Chart(document.getElementById('languageChart'), {
-    type: 'doughnut',
-    data: {
-      labels: LANGUAGE_DATA.labels,
-      datasets: [{
-        data: LANGUAGE_DATA.values,
-        backgroundColor: LANGUAGE_DATA.colors,
-        borderColor: '#141310',
-        borderWidth: 2,
-        hoverOffset: 6
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'right',
-          labels: {
-            boxWidth: 12,
-            padding: 10,
-            font: { size: 10 }
-          }
-        }
-      },
-      cutout: '60%',
-      animation: { duration: 800, easing: 'easeOutQuart' }
-    }
+}
+
+function renderLangBars() {
+  const container = document.getElementById('lang-bars');
+  if (!container) return;
+  container.innerHTML = '';
+
+  LANGUAGE_DATA.forEach((item, i) => {
+    const row = document.createElement('div');
+    row.className = 'lang-row';
+    row.innerHTML = `
+      <div class="lang-row-top">
+        <span class="lang-name">${item.lang}</span>
+        <span class="lang-pct">${item.pct}%</span>
+      </div>
+      <div class="lang-track">
+        <div class="lang-fill" style="background:${item.color};width:0%" data-target="${item.pct}"></div>
+      </div>
+    `;
+    container.appendChild(row);
+  });
+
+  // Animate fills in
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.lang-fill').forEach((fill, i) => {
+      const target = fill.dataset.target;
+      setTimeout(() => {
+        fill.style.transition = `width 700ms cubic-bezier(0.16, 1, 0.3, 1)`;
+        fill.style.width = target + '%';
+      }, i * 80);
+    });
   });
 }
 
