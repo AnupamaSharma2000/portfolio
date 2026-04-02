@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annu Sharma — Life Portfolio</title>
+  <meta name="description" content="Data Scientist, ML Engineer, Builder. Interactive life portfolio of Annu Sharma.">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- ============ TERMINAL BOOT SCREEN ============ -->
+  <div id="terminal-boot" class="terminal-boot">
+    <div class="terminal-window">
+      <div class="terminal-titlebar">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-title">annu@portfolio ~ %</span>
+      </div>
+      <div class="terminal-body" id="terminal-output">
+        <div class="terminal-cursor-line">
+          <span class="terminal-prompt">$</span>
+          <span id="typed-text"></span>
+          <span class="terminal-cursor">_</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MAIN DASHBOARD ============ -->
+  <div id="dashboard" class="dashboard hidden">
+
+    <!-- Top Nav Bar -->
+    <header class="dash-header">
+      <div class="dash-header-left">
+        <svg class="logo-svg" viewBox="0 0 40 40" fill="none" aria-label="Annu Sharma logo">
+          <rect x="2" y="2" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 28 L20 10 L28 28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <line x1="15" y1="22" x2="25" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="20" cy="10" r="2" fill="var(--accent)"/>
+        </svg>
+        <span class="logo-text">Annu Sharma</span>
+      </div>
+      <nav class="dash-nav">
+        <button class="nav-btn active" data-section="overview">Overview</button>
+        <button class="nav-btn" data-section="projects">Projects</button>
+        <button class="nav-btn" data-section="experience">Experience</button>
+        <button class="nav-btn" data-section="terminal">Terminal</button>
+        <button class="nav-btn" data-section="contact">Contact</button>
+      </nav>
+      <div class="dash-header-right">
+        <span class="status-dot"></span>
+        <span class="status-text">Available for work</span>
+      </div>
+    </header>
+
+    <!-- ====== OVERVIEW SECTION ====== -->
+    <section id="sec-overview" class="dash-section active">
+      <div class="overview-grid">
+
+        <!-- Hero card -->
+        <div class="card hero-card">
+          <div class="hero-content">
+            <div class="hero-avatar">
+              <img src="https://avatars.githubusercontent.com/u/109856599?v=4" alt="Annu Sharma" class="avatar-img"/>
+            </div>
+            <div class="hero-info">
+              <h1 class="hero-name">Annu Sharma</h1>
+              <p class="hero-title">Data Scientist &amp; ML Engineer</p>
+              <p class="hero-subtitle">MS Data Science @ UMD &bull; BITS Pilani Alumna &bull; Ex-Synechron</p>
+              <div class="hero-tags">
+                <span class="tag">Machine Learning</span>
+                <span class="tag">Deep Learning</span>
+                <span class="tag">NLP</span>
+                <span class="tag">Data Engineering</span>
+                <span class="tag">Computer Vision</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="card stat-card">
+          <div class="stat-icon"><i data-lucide="git-commit-horizontal"></i></div>
+          <div class="stat-value" data-count="93">0</div>
+          <div class="stat-label">Commits (2026)</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon"><i data-lucide="folder-git-2"></i></div>
+          <div class="stat-value" data-count="16">0</div>
+          <div class="stat-label">Public Repos</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon"><i data-lucide="code-2"></i></div>
+          <div class="stat-value" data-count="6">0</div>
+          <div class="stat-label">Languages</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon"><i data-lucide="trophy"></i></div>
+          <div class="stat-value" data-count="112">0</div>
+          <div class="stat-label">Contributions</div>
+        </div>
+
+        <!-- GitHub Activity Chart -->
+        <div class="card chart-card">
+          <h3 class="card-title"><i data-lucide="activity"></i> GitHub Activity</h3>
+          <div class="chart-container">
+            <canvas id="activityChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Skills Radar -->
+        <div class="card chart-card">
+          <h3 class="card-title"><i data-lucide="radar"></i> Skills Radar</h3>
+          <div class="chart-container">
+            <canvas id="skillsRadar"></canvas>
+          </div>
+        </div>
+
+        <!-- Languages Donut -->
+        <div class="card chart-card chart-small">
+          <h3 class="card-title"><i data-lucide="pie-chart"></i> Languages</h3>
+          <div class="chart-container chart-container-sm">
+            <canvas id="languageChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Currently Section -->
+        <div class="card currently-card">
+          <h3 class="card-title"><i data-lucide="sparkles"></i> Currently</h3>
+          <div class="currently-grid">
+            <div class="currently-item">
+              <span class="currently-label">Reading</span>
+              <span class="currently-value">Designing Machine Learning Systems — Chip Huyen</span>
+            </div>
+            <div class="currently-item">
+              <span class="currently-label">Watching</span>
+              <span class="currently-value">3Blue1Brown — Neural Networks Series</span>
+            </div>
+            <div class="currently-item">
+              <span class="currently-label">Building</span>
+              <span class="currently-value">RL Playground Interactive Dashboard</span>
+            </div>
+            <div class="currently-item">
+              <span class="currently-label">Gym</span>
+              <span class="currently-value">Push/Pull/Legs split &bull; 5x/week</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fun Facts -->
+        <div class="card funfacts-card">
+          <h3 class="card-title"><i data-lucide="zap"></i> Fun Facts</h3>
+          <ul class="funfacts-list">
+            <li><span class="funfact-emoji">&#127758;</span> Moved from India to the US for grad school</li>
+            <li><span class="funfact-emoji">&#9749;</span> Fueled by chai and late-night debugging</li>
+            <li><span class="funfact-emoji">&#127947;</span> Gym is non-negotiable — even during finals</li>
+            <li><span class="funfact-emoji">&#128200;</span> Built an AI career agent to automate internship search</li>
+            <li><span class="funfact-emoji">&#127775;</span> BITSian who loves open source &amp; competitive coding</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====== PROJECTS SECTION ====== -->
+    <section id="sec-projects" class="dash-section">
+      <div class="section-header">
+        <h2>Projects</h2>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="ml">ML/AI</button>
+          <button class="filter-btn" data-filter="data">Data</button>
+          <button class="filter-btn" data-filter="web">Web</button>
+        </div>
+      </div>
+      <div class="projects-grid" id="projects-grid">
+        <!-- filled by JS -->
+      </div>
+    </section>
+
+    <!-- ====== EXPERIENCE SECTION ====== -->
+    <section id="sec-experience" class="dash-section">
+      <h2 class="section-title">Experience Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content card">
+            <div class="timeline-date">2025 — Present</div>
+            <h3>MS in Data Science</h3>
+            <p class="timeline-org">University of Maryland, College Park</p>
+            <p class="timeline-desc">Focusing on ML systems, deep learning, NLP, and data engineering. Coursework in advanced statistics, neural weather prediction, and reinforcement learning.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content card">
+            <div class="timeline-date">2022 — 2025</div>
+            <h3>Technology Analyst</h3>
+            <p class="timeline-org">Synechron</p>
+            <p class="timeline-desc">Worked on data engineering pipelines, financial data analysis, and building ML models for enterprise clients. Developed scalable ETL solutions and contributed to core analytics platforms.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content card">
+            <div class="timeline-date">2018 — 2022</div>
+            <h3>B.E. in Computer Science</h3>
+            <p class="timeline-org">BITS Pilani</p>
+            <p class="timeline-desc">Strong foundations in algorithms, data structures, machine learning, and software engineering. Active in competitive programming and open-source communities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== TERMINAL SECTION ====== -->
+    <section id="sec-terminal" class="dash-section">
+      <div class="terminal-window interactive-terminal">
+        <div class="terminal-titlebar">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">annu@portfolio ~ interactive</span>
+        </div>
+        <div class="terminal-body" id="interactive-output">
+          <div class="terminal-line">
+            <span class="terminal-prompt">$</span>
+            <span class="terminal-text">Welcome to Annu's interactive terminal. Type <span class="cmd-highlight">help</span> for available commands.</span>
+          </div>
+        </div>
+        <div class="terminal-input-area">
+          <span class="terminal-prompt">$</span>
+          <input type="text" id="terminal-input" class="terminal-input" placeholder="Type a command..." autocomplete="off" spellcheck="false"/>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== CONTACT SECTION ====== -->
+    <section id="sec-contact" class="dash-section">
+      <div class="contact-grid">
+        <div class="card contact-hero-card">
+          <h2>Let's Connect</h2>
+          <p>I'm actively seeking Summer 2026 internships in Data Science, Machine Learning, and AI. Open to collaborations, conversations, and coffee chats.</p>
+          <div class="contact-links">
+            <a href="mailto:sharma25@umd.edu" class="contact-link" target="_blank" rel="noopener noreferrer">
+              <i data-lucide="mail"></i>
+              <span>sharma25@umd.edu</span>
+            </a>
+            <a href="https://github.com/AnupamaSharma2000" class="contact-link" target="_blank" rel="noopener noreferrer">
+              <i data-lucide="github"></i>
+              <span>AnupamaSharma2000</span>
+            </a>
+            <a href="https://linkedin.com/in/" class="contact-link" target="_blank" rel="noopener noreferrer">
+              <i data-lucide="linkedin"></i>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+        <div class="card contact-terminal-card">
+          <pre class="contact-ascii">
+  ╔══════════════════════════════════╗
+  ║                                  ║
+  ║   > STATUS: Open to work         ║
+  ║   > SEEKING: Summer 2026 Intern  ║
+  ║   > FOCUS: ML / DS / AI          ║
+  ║   > LOCATION: College Park, MD   ║
+  ║   > VISA: F-1 (OPT eligible)    ║
+  ║                                  ║
+  ╚══════════════════════════════════╝
+          </pre>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
