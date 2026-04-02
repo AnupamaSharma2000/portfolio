@@ -101,7 +101,7 @@ const COMMANDS = {
   Name:     Annu Sharma
   Role:     Data Scientist & ML Engineer
   School:   University of Maryland (MS Data Science)
-  Alma:     BITS Pilani (B.E. Computer Science)
+  Alma:     BITS Pilani (MS Physics + B.E. EEE)
   Focus:    ML systems, Deep Learning, NLP
   Status:   Seeking Summer 2026 internships
 <span class="boot-accent">╚════════════════════════════════════════╝</span>`,
