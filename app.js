@@ -366,10 +366,10 @@ function initTerminal() {
       const cmd = input.value.trim().toLowerCase();
       input.value = '';
 
-      // Echo command
+      // Echo command with Ubuntu PS1
       const echoLine = document.createElement('div');
       echoLine.className = 'terminal-line';
-      echoLine.innerHTML = `<span class="terminal-prompt">$</span><span class="terminal-text">${cmd}</span>`;
+      echoLine.innerHTML = `<span class="ubuntu-ps1"><span class="ps1-user">annu</span><span class="ps1-at">@</span><span class="ps1-host">portfolio</span><span class="ps1-colon">:</span><span class="ps1-path">~</span><span class="ps1-dollar">$</span></span><span class="terminal-text">&nbsp;${cmd}</span>`;
       output.appendChild(echoLine);
 
       // Process

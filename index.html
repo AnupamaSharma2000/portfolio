@@ -159,15 +159,7 @@
           </div>
         </div>
 
-        <!-- Fun Facts -->
-        <div class="card funfacts-card">
-          <h3 class="card-title"><i data-lucide="zap"></i> Fun Facts</h3>
-          <ul class="funfacts-list">
-            <li><span class="funfact-emoji">&#127992;</span> Love playing badminton</li>
-            <li><span class="funfact-emoji">&#9749;</span> Loves chai AND coffee &mdash; and would absolutely mix the two just to annoy both sides</li>
-            <li><span class="funfact-emoji">&#128049;</span> If I could be any animal, I&rsquo;d be a cat</li>
-          </ul>
-        </div>
+
 
       </div>
     </section>
@@ -247,22 +239,25 @@
 
     <!-- ====== TERMINAL SECTION ====== -->
     <section id="sec-terminal" class="dash-section">
-      <div class="terminal-window interactive-terminal">
+      <div class="terminal-window interactive-terminal ubuntu-terminal">
         <div class="terminal-titlebar">
           <span class="terminal-dot red"></span>
           <span class="terminal-dot yellow"></span>
           <span class="terminal-dot green"></span>
-          <span class="terminal-title">annu@portfolio ~ interactive</span>
+          <span class="terminal-title">annu@portfolio: ~</span>
         </div>
         <div class="terminal-body" id="interactive-output">
           <div class="terminal-line">
-            <span class="terminal-prompt">$</span>
-            <span class="terminal-text">Welcome to Annu's interactive terminal. Type <span class="cmd-highlight">help</span> for available commands.</span>
+            <span class="terminal-text muted">Last login: Thu Apr  2 21:00:00 2026 on ttys001</span>
+          </div>
+          <div class="terminal-line">
+            <span class="ubuntu-ps1"><span class="ps1-user">annu</span><span class="ps1-at">@</span><span class="ps1-host">portfolio</span><span class="ps1-colon">:</span><span class="ps1-path">~</span><span class="ps1-dollar">$</span></span>
+            <span class="terminal-text">&nbsp;Type <span class="cmd-highlight">help</span> for available commands.</span>
           </div>
         </div>
         <div class="terminal-input-area">
-          <span class="terminal-prompt">$</span>
-          <input type="text" id="terminal-input" class="terminal-input" placeholder="Type a command..." autocomplete="off" spellcheck="false"/>
+          <span class="ubuntu-ps1"><span class="ps1-user">annu</span><span class="ps1-at">@</span><span class="ps1-host">portfolio</span><span class="ps1-colon">:</span><span class="ps1-path">~</span><span class="ps1-dollar">$</span></span>
+          <input type="text" id="terminal-input" class="terminal-input" placeholder="" autocomplete="off" spellcheck="false"/>
         </div>
       </div>
     </section>
@@ -362,18 +357,34 @@
             </a>
           </div>
         </div>
-        <div class="card contact-terminal-card">
-          <pre class="contact-ascii">
-  ╔══════════════════════════════════╗
-  ║                                  ║
-  ║   > STATUS: Open to work         ║
-  ║   > SEEKING: Summer 2026 Intern  ║
-  ║   > FOCUS: ML / DS / AI          ║
-  ║   > LOCATION: College Park, MD   ║
-  ║   > VISA: F-1 (OPT eligible)    ║
-  ║                                  ║
-  ╚══════════════════════════════════╝
-          </pre>
+        <div class="card contact-status-card">
+          <h3 class="card-title"><i data-lucide="terminal"></i> Status</h3>
+          <div class="contact-status-list">
+            <div class="contact-status-row">
+              <span class="cs-key">status</span>
+              <span class="cs-val green">open_to_work</span>
+            </div>
+            <div class="contact-status-row">
+              <span class="cs-key">seeking</span>
+              <span class="cs-val">Summer 2026 Internship</span>
+            </div>
+            <div class="contact-status-row">
+              <span class="cs-key">focus</span>
+              <span class="cs-val">ML &bull; DS &bull; AI</span>
+            </div>
+            <div class="contact-status-row">
+              <span class="cs-key">location</span>
+              <span class="cs-val">College Park, MD</span>
+            </div>
+            <div class="contact-status-row">
+              <span class="cs-key">visa</span>
+              <span class="cs-val">F-1 &mdash; OPT eligible</span>
+            </div>
+            <div class="contact-status-row">
+              <span class="cs-key">response_time</span>
+              <span class="cs-val blue">&lt; 24 hours</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

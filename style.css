@@ -38,33 +38,40 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-/* Dark theme (default) */
+/* Dark theme — coder/VS Code vibes */
 [data-theme="dark"] {
-  --color-bg: #0c0b09;
-  --color-surface: #141310;
-  --color-surface-2: #1a1916;
-  --color-surface-3: #21201c;
-  --color-border: #2e2c26;
-  --color-border-hover: #433f35;
-  --color-text: #e8e4d9;
-  --color-text-muted: #9b9688;
-  --color-text-faint: #5e5a50;
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-surface-2: #1c2128;
+  --color-surface-3: #22272e;
+  --color-border: #30363d;
+  --color-border-hover: #484f58;
+  --color-text: #cdd9e5;
+  --color-text-muted: #768390;
+  --color-text-faint: #444c56;
 
-  --accent: #d4a24c;
-  --accent-hover: #e6b85e;
-  --accent-dim: #b08530;
-  --accent-glow: rgba(212, 162, 76, 0.15);
-  --accent-glow-strong: rgba(212, 162, 76, 0.3);
+  /* Accent: VS Code cyan/teal — readable, coder-native */
+  --accent: #39d353;
+  --accent-hover: #56e36e;
+  --accent-dim: #2a9e40;
+  --accent-glow: rgba(57, 211, 83, 0.12);
+  --accent-glow-strong: rgba(57, 211, 83, 0.25);
 
-  --terminal-green: #a3d977;
-  --terminal-amber: #d4a24c;
-  --terminal-red: #e86b6b;
-  --terminal-blue: #6bb8e8;
-  --terminal-purple: #b88be8;
+  /* Secondary accent — blue for links/info */
+  --accent-blue: #58a6ff;
+  --accent-purple: #bc8cff;
+  --accent-orange: #ffa657;
 
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,0.5);
+  --terminal-green: #39d353;
+  --terminal-amber: #ffa657;
+  --terminal-red: #ff7b72;
+  --terminal-blue: #58a6ff;
+  --terminal-purple: #bc8cff;
+  --terminal-cyan: #39c5cf;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.6);
 }
 
 /* ============================================
@@ -501,30 +508,9 @@
   line-height: 1.4;
 }
 
-/* Fun facts card */
-.funfacts-card {
-  grid-column: span 1;
-}
-
-.funfacts-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.funfacts-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  font-size: var(--text-sm);
-  color: var(--color-text);
-  line-height: 1.5;
-}
-
-.funfact-emoji {
-  font-size: 1.1em;
-  flex-shrink: 0;
+/* Currently card — full width now that fun facts is removed */
+.currently-card {
+  grid-column: 1 / -1 !important;
 }
 
 /* Language bars */
@@ -900,19 +886,92 @@
   flex-shrink: 0;
 }
 
-.contact-terminal-card {
+/* Contact status card */
+.contact-status-card {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
 
-.contact-ascii {
+.contact-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.contact-status-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.contact-status-row:last-child { border-bottom: none; }
+
+.cs-key {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--accent);
-  line-height: 1.6;
-  white-space: pre;
+  color: var(--accent-purple, #bc8cff);
+  letter-spacing: 0.02em;
 }
+
+.cs-val {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+.cs-val.green { color: var(--terminal-green); font-weight: 600; }
+.cs-val.blue  { color: var(--accent-blue, #58a6ff); }
+
+/* Ubuntu PS1 prompt */
+.ubuntu-ps1 {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  flex-shrink: 0;
+  user-select: none;
+}
+.ps1-user   { color: #57c7ff; font-weight: 600; }
+.ps1-at     { color: var(--color-text-muted); }
+.ps1-host   { color: #5af78e; font-weight: 600; }
+.ps1-colon  { color: var(--color-text-muted); }
+.ps1-path   { color: #57c7ff; font-weight: 600; }
+.ps1-dollar { color: var(--color-text); margin-left: 2px; }
+
+.terminal-text.muted { color: var(--color-text-faint); }
+
+/* Ubuntu terminal overrides */
+.ubuntu-terminal .terminal-titlebar {
+  background: #2d0f36;
+}
+
+.ubuntu-terminal .terminal-body {
+  background: #300a24;
+  color: #f8f8f2;
+}
+
+.ubuntu-terminal .terminal-input-area {
+  background: #300a24;
+  border-top: 1px solid #4a1640;
+}
+
+.ubuntu-terminal .terminal-input {
+  color: #f8f8f2;
+}
+
+.ubuntu-terminal .terminal-text {
+  color: #f8f8f2;
+}
+
+.ubuntu-terminal .cmd-highlight {
+  color: #5af78e;
+  font-weight: 600;
+}
+
+.ubuntu-terminal .boot-ok     { color: #5af78e; }
+.ubuntu-terminal .boot-info   { color: #57c7ff; }
+.ubuntu-terminal .boot-warn   { color: #f3f99d; }
+.ubuntu-terminal .boot-accent { color: #ff6ac1; }
 
 /* ============================================
    SKILL-UP SECTION
