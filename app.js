@@ -273,6 +273,11 @@ const BOOT_LINES = [
   setTimeout(typeLine, 500);
 })();
 
+// ---- SKILL-UP CONFIG ----
+// Apps Script Web App URL — token injected at runtime
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLj1EI97HGEnrrtfo4F-x7sXE-Kv8Q4Y6D0xOZLVDMD-P_3zIJe-eMh49Dmbc4kJkk/exec';
+const APPS_SCRIPT_TOKEN = 'REPLACE_ME'; // ← you will set this
+
 // ---- DASHBOARD INIT ----
 function initDashboard() {
   lucide.createIcons();
@@ -284,6 +289,10 @@ function initDashboard() {
   animateCounters();
   // Render lang bars after a frame so the DOM is fully painted
   requestAnimationFrame(() => requestAnimationFrame(renderLangBars));
+  // Fetch skill-up data
+  fetchSkillUpData();
+  // Cursor trail
+  initCursorTrail();
 }
 
 // ---- NAVIGATION ----
@@ -532,15 +541,200 @@ function animateCounters() {
     const target = parseInt(el.dataset.count);
     const duration = 1200;
     const start = performance.now();
-
     function update(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       el.textContent = Math.round(target * eased);
       if (progress < 1) requestAnimationFrame(update);
     }
     requestAnimationFrame(update);
   });
+}
+
+// ============================================================
+// SKILL-UP DATA FETCH + RENDER
+// ============================================================
+async function fetchSkillUpData() {
+  // Token not set yet — show placeholder state
+  if (APPS_SCRIPT_TOKEN === 'REPLACE_ME') {
+    renderSkillUpEmpty('Tracker not connected yet — add your data in Google Sheets to see stats here.');
+    return;
+  }
+  try {
+    const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(APPS_SCRIPT_TOKEN)}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    renderSkillUp(data);
+  } catch (err) {
+    console.warn('skill-up fetch failed:', err.message);
+    renderSkillUpEmpty('Could not load tracker data. Check back later.');
+  }
+}
+
+function renderSkillUpEmpty(msg) {
+  ['su-streak','su-total','su-easy','su-medium','su-hard','su-week']
+    .forEach(id => { const el = document.getElementById(id); if (el) el.textContent = '0'; });
+  const recent = document.getElementById('su-recent');
+  const certs  = document.getElementById('su-certs');
+  if (recent) recent.innerHTML = `<div class="su-loading">${msg}</div>`;
+  if (certs)  certs.innerHTML  = `<div class="su-loading">${msg}</div>`;
+}
+
+function renderSkillUp(data) {
+  const p = data.problems || {};
+
+  // Animate stat numbers in
+  const statMap = {
+    'su-streak': p.streak    || 0,
+    'su-total':  p.total     || 0,
+    'su-easy':   p.easy      || 0,
+    'su-medium': p.medium    || 0,
+    'su-hard':   p.hard      || 0,
+    'su-week':   p.this_week || 0,
+  };
+  Object.entries(statMap).forEach(([id, target]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const dur = 900, start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / dur, 1);
+      const e = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(target * e);
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+
+  // Recent problems
+  const recentEl = document.getElementById('su-recent');
+  if (recentEl) {
+    const recent = p.recent || [];
+    if (!recent.length) {
+      recentEl.innerHTML = '<div class="su-loading">No problems logged yet — start solving!</div>';
+    } else {
+      recentEl.innerHTML = recent.map(r => `
+        <div class="su-problem-row">
+          <div class="su-problem-title" title="${r.title}">${r.title}</div>
+          <div class="su-problem-meta">
+            <span class="su-platform">${r.platform}</span>
+            <span class="su-diff ${r.difficulty}">${r.difficulty}</span>
+          </div>
+          <div class="su-problem-links">
+            ${r.problem  ? `<a href="${r.problem}"  target="_blank" rel="noopener">Problem</a>` : ''}
+            ${r.solution ? `<a href="${r.solution}" target="_blank" rel="noopener">Solution</a>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  // Certs
+  const certsEl = document.getElementById('su-certs');
+  if (certsEl) {
+    const certs = data.certs || [];
+    if (!certs.length) {
+      certsEl.innerHTML = '<div class="su-loading">No certifications tracked yet.</div>';
+    } else {
+      certsEl.innerHTML = certs.map(c => {
+        const statusClass = c.status === 'Completed' ? 'completed'
+                          : c.status === 'Planned'   ? 'planned' : 'progress';
+        return `
+          <div class="su-cert-row">
+            <div class="su-cert-top">
+              <span class="su-cert-name">${c.name}</span>
+              <span class="su-cert-status ${statusClass}">${c.status}</span>
+            </div>
+            <div class="su-cert-provider">${c.provider}${c.eta ? ' • ETA: ' + c.eta : ''}</div>
+            <div class="su-cert-meta">
+              <span class="su-cert-pct">${c.progress}%</span>
+              <div class="su-cert-track">
+                <div class="su-cert-fill" data-target="${c.progress}"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Animate cert progress bars
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.su-cert-fill').forEach((fill, i) => {
+          setTimeout(() => { fill.style.width = fill.dataset.target + '%'; }, i * 120);
+        });
+      });
+    }
+  }
+}
+
+// ============================================================
+// CURSOR TRAIL
+// ============================================================
+function initCursorTrail() {
+  const canvas = document.getElementById('cursor-trail');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // Resize canvas to fill window
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const particles = [];
+  let mouse = { x: -999, y: -999 };
+
+  window.addEventListener('mousemove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    // Spawn 2 particles per move
+    for (let i = 0; i < 2; i++) {
+      particles.push({
+        x:     mouse.x + (Math.random() - 0.5) * 6,
+        y:     mouse.y + (Math.random() - 0.5) * 6,
+        r:     Math.random() * 3 + 1.5,
+        alpha: 0.55 + Math.random() * 0.3,
+        vx:   (Math.random() - 0.5) * 0.6,
+        vy:   -(Math.random() * 0.8 + 0.2),
+        life:  1.0,
+        decay: 0.032 + Math.random() * 0.02,
+      });
+    }
+  });
+
+  function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x    += p.vx;
+      p.y    += p.vy;
+      p.life -= p.decay;
+      p.r    *= 0.97;
+
+      if (p.life <= 0) { particles.splice(i, 1); continue; }
+
+      // Amber glow
+      ctx.save();
+      ctx.globalAlpha = p.alpha * p.life;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+
+      // Inner bright core
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      grad.addColorStop(0,   'rgba(255, 220, 120, 1)');
+      grad.addColorStop(0.5, 'rgba(212, 162, 76, 0.8)');
+      grad.addColorStop(1,   'rgba(180, 120, 30, 0)');
+      ctx.fillStyle = grad;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
 }

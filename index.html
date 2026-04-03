@@ -58,6 +58,7 @@
         <button class="nav-btn" data-section="projects">Projects</button>
         <button class="nav-btn" data-section="experience">Experience</button>
         <button class="nav-btn" data-section="terminal">Terminal</button>
+        <button class="nav-btn" data-section="skills">Skill-Up</button>
         <button class="nav-btn" data-section="contact">Contact</button>
       </nav>
       <div class="dash-header-right">
@@ -129,12 +130,10 @@
           </div>
         </div>
 
-        <!-- Languages Donut -->
+        <!-- Languages Bar -->
         <div class="card chart-card chart-small">
-          <h3 class="card-title"><i data-lucide="pie-chart"></i> Languages</h3>
-          <div class="chart-container chart-container-sm">
-            <canvas id="languageChart"></canvas>
-          </div>
+          <h3 class="card-title"><i data-lucide="bar-chart-2"></i> Languages</h3>
+          <div id="lang-bars" class="lang-bars-container"></div>
         </div>
 
         <!-- Currently Section -->
@@ -143,11 +142,11 @@
           <div class="currently-grid">
             <div class="currently-item">
               <span class="currently-label">Reading</span>
-              <span class="currently-value">Designing Machine Learning Systems — Chip Huyen</span>
+              <span class="currently-value">Around the World in 80 Days — Jules Verne</span>
             </div>
             <div class="currently-item">
               <span class="currently-label">Watching</span>
-              <span class="currently-value">3Blue1Brown — Neural Networks Series</span>
+              <span class="currently-value">Young Sherlock</span>
             </div>
             <div class="currently-item">
               <span class="currently-label">Building</span>
@@ -155,7 +154,7 @@
             </div>
             <div class="currently-item">
               <span class="currently-label">Gym</span>
-              <span class="currently-value">Push/Pull/Legs split &bull; 5x/week</span>
+              <span class="currently-value">Whatever doesn't hurt today</span>
             </div>
           </div>
         </div>
@@ -164,11 +163,9 @@
         <div class="card funfacts-card">
           <h3 class="card-title"><i data-lucide="zap"></i> Fun Facts</h3>
           <ul class="funfacts-list">
-            <li><span class="funfact-emoji">&#127758;</span> Moved from India to the US for grad school</li>
-            <li><span class="funfact-emoji">&#9749;</span> Fueled by chai and late-night debugging</li>
-            <li><span class="funfact-emoji">&#127947;</span> Gym is non-negotiable — even during finals</li>
-            <li><span class="funfact-emoji">&#128200;</span> Built an AI career agent to automate internship search</li>
-            <li><span class="funfact-emoji">&#127775;</span> BITSian who loves open source &amp; competitive coding</li>
+            <li><span class="funfact-emoji">&#127992;</span> Love playing badminton</li>
+            <li><span class="funfact-emoji">&#9749;</span> Loves chai AND coffee &mdash; and would absolutely mix the two just to annoy both sides</li>
+            <li><span class="funfact-emoji">&#128049;</span> If I could be any animal, I&rsquo;d be a cat</li>
           </ul>
         </div>
 
@@ -195,33 +192,56 @@
     <section id="sec-experience" class="dash-section">
       <h2 class="section-title">Experience Timeline</h2>
       <div class="timeline">
+
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content card">
-            <div class="timeline-date">2025 — Present</div>
+            <div class="timeline-date">Aug 2025 &mdash; May 2027</div>
             <h3>MS in Data Science</h3>
             <p class="timeline-org">University of Maryland, College Park</p>
-            <p class="timeline-desc">Focusing on ML systems, deep learning, NLP, and data engineering. Coursework in advanced statistics, neural weather prediction, and reinforcement learning.</p>
+            <p class="timeline-desc">Principles of Machine Learning, Algorithms for Data Science, Big Data Systems (Apache Spark/PySpark), Data Representation and Modeling.</p>
           </div>
         </div>
+
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content card">
-            <div class="timeline-date">2022 — 2025</div>
-            <h3>Technology Analyst</h3>
-            <p class="timeline-org">Synechron</p>
-            <p class="timeline-desc">Worked on data engineering pipelines, financial data analysis, and building ML models for enterprise clients. Developed scalable ETL solutions and contributed to core analytics platforms.</p>
+            <div class="timeline-date">July 2024 &mdash; July 2025</div>
+            <h3>Jr. Associate &mdash; Machine Learning Engineering</h3>
+            <p class="timeline-org">Synechron Technologies, Innovation &amp; Finlabs</p>
+            <ul class="timeline-bullets">
+              <li>Fine-tuned Qwen2 Vision Language Model for financial document extraction &mdash; ~25% F1 improvement on A100 GPUs</li>
+              <li>ML-based user segmentation (RoBERTa, Random Forest) for scoring and ranking user profiles</li>
+              <li>Designed end-to-end ML pipelines in an Agentic AI framework with automated data quality validation</li>
+              <li>Built REST APIs for internal ML model serving, standardizing inference endpoints</li>
+            </ul>
           </div>
         </div>
+
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content card">
-            <div class="timeline-date">2018 — 2022</div>
-            <h3>B.E. in Computer Science</h3>
-            <p class="timeline-org">BITS Pilani</p>
-            <p class="timeline-desc">Strong foundations in algorithms, data structures, machine learning, and software engineering. Active in competitive programming and open-source communities.</p>
+            <div class="timeline-date">July 2023 &mdash; June 2024</div>
+            <h3>AI-ML Intern</h3>
+            <p class="timeline-org">Synechron Technologies, Innovation &amp; Finlabs</p>
+            <ul class="timeline-bullets">
+              <li>Built a multi-agent retrieval &amp; ranking pipeline using LangGraph and MemGPT</li>
+              <li>Developed end-to-end RAG system with ChromaDB, LangChain, and Streamlit for document Q&amp;A</li>
+              <li>Benchmarked inference costs, latency, and carbon footprint across retrieval-augmented and agentic frameworks</li>
+            </ul>
           </div>
         </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content card">
+            <div class="timeline-date">Aug 2019 &mdash; July 2024</div>
+            <h3>MS Physics (Hons.) + B.E. Electrical &amp; Electronics</h3>
+            <p class="timeline-org">BITS Pilani, Goa</p>
+            <p class="timeline-desc">Dual degree combining rigorous physics foundations with electrical engineering. Strong analytical and mathematical foundations.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -244,6 +264,80 @@
           <span class="terminal-prompt">$</span>
           <input type="text" id="terminal-input" class="terminal-input" placeholder="Type a command..." autocomplete="off" spellcheck="false"/>
         </div>
+      </div>
+    </section>
+
+    <!-- ====== SKILL-UP SECTION ====== -->
+    <section id="sec-skills" class="dash-section">
+      <div class="skillup-header">
+        <div>
+          <h2 class="section-title" style="margin-bottom:var(--space-1)">Skill-Up</h2>
+          <p class="skillup-subtitle">Daily coding practice &amp; certifications — auto-synced from my tracker</p>
+        </div>
+        <a href="https://github.com/AnupamaSharma2000/skill-up" class="skillup-repo-link" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="github"></i> skill-up repo
+        </a>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="skillup-stats" id="skillup-stats">
+        <div class="card skillup-stat-card">
+          <div class="skillup-stat-icon"><i data-lucide="flame"></i></div>
+          <div class="skillup-stat-val" id="su-streak">—</div>
+          <div class="skillup-stat-label">Day Streak</div>
+        </div>
+        <div class="card skillup-stat-card">
+          <div class="skillup-stat-icon"><i data-lucide="check-circle-2"></i></div>
+          <div class="skillup-stat-val" id="su-total">—</div>
+          <div class="skillup-stat-label">Total Solved</div>
+        </div>
+        <div class="card skillup-stat-card easy">
+          <div class="skillup-stat-val" id="su-easy">—</div>
+          <div class="skillup-stat-label">Easy</div>
+        </div>
+        <div class="card skillup-stat-card medium">
+          <div class="skillup-stat-val" id="su-medium">—</div>
+          <div class="skillup-stat-label">Medium</div>
+        </div>
+        <div class="card skillup-stat-card hard">
+          <div class="skillup-stat-val" id="su-hard">—</div>
+          <div class="skillup-stat-label">Hard</div>
+        </div>
+        <div class="card skillup-stat-card">
+          <div class="skillup-stat-icon"><i data-lucide="calendar"></i></div>
+          <div class="skillup-stat-val" id="su-week">—</div>
+          <div class="skillup-stat-label">This Week</div>
+        </div>
+      </div>
+
+      <!-- Recent problems + Certs side by side -->
+      <div class="skillup-grid">
+        <div class="card skillup-problems-card">
+          <h3 class="card-title"><i data-lucide="code-2"></i> Recent Problems</h3>
+          <div id="su-recent"><div class="su-loading">Loading from tracker...</div></div>
+        </div>
+
+        <div class="card skillup-certs-card">
+          <h3 class="card-title"><i data-lucide="award"></i> Certifications</h3>
+          <div id="su-certs"><div class="su-loading">Loading from tracker...</div></div>
+        </div>
+      </div>
+
+      <!-- Publication card -->
+      <div class="card publication-card">
+        <div class="pub-badge">Publication</div>
+        <h3 class="pub-title">Towards Evaluating Robustness of Prompt Adherence in Text-to-Image Models</h3>
+        <p class="pub-authors">Anupama Sharma &bull; Sep 2024 – Mar 2025</p>
+        <p class="pub-abstract">Designed a VAE-based evaluation framework transforming high-dimensional image data into structured metrics. Benchmarked 5 state-of-the-art text-to-image models across 3 resolutions and 3 iterations to quantify spatial grounding failures. Evaluated spatial consistency by analyzing object placement, scale relationships, and scene composition.</p>
+        <div class="pub-tags">
+          <span class="pub-tag">Computer Vision</span>
+          <span class="pub-tag">Text-to-Image</span>
+          <span class="pub-tag">VAE</span>
+          <span class="pub-tag">Evaluation Framework</span>
+        </div>
+        <a href="#" class="pub-btn" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="file-text"></i> Read Paper
+        </a>
       </div>
     </section>
 
@@ -285,6 +379,9 @@
     </section>
 
   </div>
+
+  <!-- Cursor trail canvas -->
+  <canvas id="cursor-trail" aria-hidden="true"></canvas>
 
   <script src="./app.js"></script>
 </body>
