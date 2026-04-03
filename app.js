@@ -274,9 +274,7 @@ const BOOT_LINES = [
 })();
 
 // ---- SKILL-UP CONFIG ----
-// Apps Script Web App URL — token injected at runtime
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLj1EI97HGEnrrtfo4F-x7sXE-Kv8Q4Y6D0xOZLVDMD-P_3zIJe-eMh49Dmbc4kJkk/exec';
-const APPS_SCRIPT_TOKEN = 'REPLACE_ME'; // ← you will set this
 
 // ---- DASHBOARD INIT ----
 function initDashboard() {
@@ -556,21 +554,15 @@ function animateCounters() {
 // SKILL-UP DATA FETCH + RENDER
 // ============================================================
 async function fetchSkillUpData() {
-  // Token not set yet — show placeholder state
-  if (APPS_SCRIPT_TOKEN === 'REPLACE_ME') {
-    renderSkillUpEmpty('Tracker not connected yet — add your data in Google Sheets to see stats here.');
-    return;
-  }
   try {
-    const url = `${APPS_SCRIPT_URL}?token=${encodeURIComponent(APPS_SCRIPT_TOKEN)}`;
-    const res = await fetch(url);
+    const res = await fetch(APPS_SCRIPT_URL);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     if (data.error) throw new Error(data.error);
     renderSkillUp(data);
   } catch (err) {
     console.warn('skill-up fetch failed:', err.message);
-    renderSkillUpEmpty('Could not load tracker data. Check back later.');
+    renderSkillUpEmpty('Add your coding problems and certs in Google Sheets to see stats here.');
   }
 }
 
